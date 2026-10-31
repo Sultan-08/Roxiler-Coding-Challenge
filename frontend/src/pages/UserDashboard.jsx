@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config/api';
 
-export default function UserDashboard({ darkMode }) {
+export default function UserDashboard() {
   const [stores, setStores] = useState([]);
   const [search, setSearch] = useState('');
   const [ratings, setRatings] = useState({});
@@ -57,28 +57,19 @@ export default function UserDashboard({ darkMode }) {
     }
   };
 
-  // Beige and Grey Palette
-  const bgCard = darkMode ? '#22201d' : '#ffffff';
-  const textMain = darkMode ? '#f4efe6' : '#221f1c';
-  const textMuted = darkMode ? '#9e978c' : '#756f66';
-  const borderCol = darkMode ? '#38352f' : '#e2dcd2';
-  const inputBg = darkMode ? '#1a1917' : '#fbf9f6';
-  const inputBorder = darkMode ? '#3d3932' : '#dcd4c7';
-  const primaryBtnBg = darkMode ? '#d5c7b3' : '#2c2825';
-  const primaryBtnText = darkMode ? '#1c1a17' : '#faf8f4';
-  const starCol = '#c58928';
+  const boxShadow = '0 4px 16px -2px rgba(45,38,30,0.05)';
 
   return (
-    <div style={{ maxWidth: '1020px', margin: '0 auto', paddingBottom: '48px', color: textMain }}>
+    <div style={{ maxWidth: '1020px', margin: '0 auto', paddingBottom: '48px', color: '#221f1c' }}>
 
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
           <span style={{ fontSize: '20px' }}>⭐</span>
-          <h2 style={{ fontSize: '28px', fontWeight: '800', letterSpacing: '-0.02em', color: textMain }}>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', letterSpacing: '-0.02em', color: '#221f1c' }}>
             Store Directory & Ratings
           </h2>
         </div>
-        <p style={{ color: textMuted, fontSize: '14.5px' }}>
+        <p style={{ color: '#756f66', fontSize: '14.5px' }}>
           Explore registered stores, submit customer feedback ratings, or modify your existing scores.
         </p>
       </div>
@@ -86,9 +77,9 @@ export default function UserDashboard({ darkMode }) {
       {message && (
         <div style={{
           padding: '12px 18px',
-          background: darkMode ? '#172b1a' : '#edf5ec',
-          color: darkMode ? '#86efac' : '#2f592a',
-          border: `1px solid ${darkMode ? '#2c5230' : '#c8e0c6'}`,
+          background: '#edf5ec',
+          color: '#2f592a',
+          border: '1px solid #c8e0c6',
           borderRadius: '10px',
           marginBottom: '24px',
           fontWeight: '600',
@@ -109,16 +100,16 @@ export default function UserDashboard({ darkMode }) {
             width: '100%',
             padding: '14px 18px',
             borderRadius: '12px',
-            border: `1px solid ${inputBorder}`,
-            background: inputBg,
-            color: textMain,
+            border: '1px solid #dcd4c7',
+            background: '#fbf9f6',
+            color: '#221f1c',
             outline: 'none',
             fontSize: '14.5px',
-            boxShadow: darkMode ? '0 2px 8px rgba(0,0,0,0.2)' : '0 2px 8px rgba(45,38,30,0.04)',
+            boxShadow: '0 2px 8px rgba(45,38,30,0.04)',
             transition: 'border-color 0.2s'
           }}
-          onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-          onBlur={(e) => e.target.style.borderColor = inputBorder}
+          onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+          onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
         />
       </div>
 
@@ -128,10 +119,10 @@ export default function UserDashboard({ darkMode }) {
           <div style={{
             textAlign: 'center',
             padding: '40px',
-            background: bgCard,
+            background: '#ffffff',
             borderRadius: '14px',
-            border: `1px solid ${borderCol}`,
-            color: textMuted
+            border: '1px solid #e2dcd2',
+            color: '#756f66'
           }}>
             Loading stores...
           </div>
@@ -139,10 +130,10 @@ export default function UserDashboard({ darkMode }) {
           <div style={{
             padding: '40px',
             textAlign: 'center',
-            background: bgCard,
+            background: '#ffffff',
             borderRadius: '14px',
-            border: `1px solid ${borderCol}`,
-            color: textMuted
+            border: '1px solid #e2dcd2',
+            color: '#756f66'
           }}>
             <p style={{ fontSize: '15px' }}>No stores found matching your criteria.</p>
           </div>
@@ -152,10 +143,10 @@ export default function UserDashboard({ darkMode }) {
               key={store.store_id}
               style={{
                 padding: '24px 26px',
-                backgroundColor: bgCard,
+                backgroundColor: '#ffffff',
                 borderRadius: '14px',
-                border: `1px solid ${borderCol}`,
-                boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 16px -2px rgba(45,38,30,0.05)',
+                border: '1px solid #e2dcd2',
+                boxShadow,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -165,21 +156,21 @@ export default function UserDashboard({ darkMode }) {
               }}
             >
               <div style={{ flex: '1', minWidth: '260px' }}>
-                <h3 style={{ fontSize: '19px', fontWeight: '800', marginBottom: '6px', color: textMain }}>
+                <h3 style={{ fontSize: '19px', fontWeight: '800', marginBottom: '6px', color: '#221f1c' }}>
                   {store.name}
                 </h3>
-                <p style={{ color: textMuted, fontSize: '13.5px', marginBottom: '8px' }}>
+                <p style={{ color: '#756f66', fontSize: '13.5px', marginBottom: '8px' }}>
                   📍 {store.address}
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: '13.5px', fontWeight: '700', color: starCol }}>
+                  <span style={{ fontSize: '13.5px', fontWeight: '700', color: '#c58928' }}>
                     Overall Rating: ⭐ {store.overall_rating || 0} / 5
                   </span>
                   {store.user_submitted_rating ? (
                     <span style={{
-                      color: darkMode ? '#86efac' : '#2f592a',
-                      background: darkMode ? '#1a2e1d' : '#edf5ec',
-                      border: `1px solid ${darkMode ? '#2c5332' : '#c8e0c6'}`,
+                      color: '#2f592a',
+                      background: '#edf5ec',
+                      border: '1px solid #c8e0c6',
                       fontSize: '12.5px',
                       fontWeight: '600',
                       padding: '3px 8px',
@@ -188,7 +179,7 @@ export default function UserDashboard({ darkMode }) {
                       Your Rating: ⭐ {store.user_submitted_rating}
                     </span>
                   ) : (
-                    <span style={{ color: textMuted, fontSize: '12.5px' }}>
+                    <span style={{ color: '#756f66', fontSize: '12.5px' }}>
                       Not rated by you yet
                     </span>
                   )}
@@ -203,9 +194,9 @@ export default function UserDashboard({ darkMode }) {
                   style={{
                     padding: '10px 14px',
                     borderRadius: '8px',
-                    border: `1px solid ${inputBorder}`,
-                    background: inputBg,
-                    color: textMain,
+                    border: '1px solid #dcd4c7',
+                    background: '#fbf9f6',
+                    color: '#221f1c',
                     outline: 'none',
                     fontSize: '13.5px',
                     cursor: 'pointer'
@@ -222,8 +213,8 @@ export default function UserDashboard({ darkMode }) {
                   onClick={() => handleRatingSubmit(store.store_id)}
                   style={{
                     padding: '10px 20px',
-                    backgroundColor: primaryBtnBg,
-                    color: primaryBtnText,
+                    backgroundColor: '#2c2825',
+                    color: '#faf8f4',
                     border: 'none',
                     borderRadius: '8px',
                     cursor: 'pointer',
@@ -242,13 +233,13 @@ export default function UserDashboard({ darkMode }) {
       </div>
 
       {/* Password Update Component */}
-      <PasswordUpdateSection darkMode={darkMode} />
+      <PasswordUpdateSection />
 
     </div>
   );
 }
 
-function PasswordUpdateSection({ darkMode }) {
+function PasswordUpdateSection() {
   const [passData, setPassData] = useState({ oldPassword: '', newPassword: '' });
   const [msg, setMsg] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -274,36 +265,27 @@ function PasswordUpdateSection({ darkMode }) {
     }
   };
 
-  const bgCard = darkMode ? '#22201d' : '#ffffff';
-  const textMain = darkMode ? '#f4efe6' : '#221f1c';
-  const textMuted = darkMode ? '#9e978c' : '#756f66';
-  const borderCol = darkMode ? '#38352f' : '#e2dcd2';
-  const inputBg = darkMode ? '#1a1917' : '#fbf9f6';
-  const inputBorder = darkMode ? '#3d3932' : '#dcd4c7';
-  const primaryBtnBg = darkMode ? '#d5c7b3' : '#2c2825';
-  const primaryBtnText = darkMode ? '#1c1a17' : '#faf8f4';
-
   return (
     <div style={{
       marginTop: '40px',
       padding: '28px',
-      background: bgCard,
+      background: '#ffffff',
       borderRadius: '14px',
-      border: `1px solid ${borderCol}`,
-      boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 16px -2px rgba(45,38,30,0.06)'
+      border: '1px solid #e2dcd2',
+      boxShadow: '0 4px 16px -2px rgba(45,38,30,0.06)'
     }}>
-      <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '6px', color: textMain }}>
+      <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '6px', color: '#221f1c' }}>
         Update Password
       </h4>
-      <p style={{ color: textMuted, fontSize: '13px', marginBottom: '18px' }}>
+      <p style={{ color: '#756f66', fontSize: '13px', marginBottom: '18px' }}>
         Change your account security password (8-16 characters, 1 uppercase, 1 special character).
       </p>
 
       {msg && (
         <div style={{
-          color: isSuccess ? (darkMode ? '#86efac' : '#2f592a') : (darkMode ? '#fca5a5' : '#a82e22'),
-          background: isSuccess ? (darkMode ? '#172b1a' : '#edf5ec') : (darkMode ? '#321d1b' : '#faedeb'),
-          border: `1px solid ${isSuccess ? (darkMode ? '#2c5230' : '#c8e0c6') : (darkMode ? '#542823' : '#f0cdc9')}`,
+          color: isSuccess ? '#2f592a' : '#a82e22',
+          background: isSuccess ? '#edf5ec' : '#faedeb',
+          border: `1px solid ${isSuccess ? '#c8e0c6' : '#f0cdc9'}`,
           padding: '11px 14px',
           borderRadius: '8px',
           marginBottom: '16px',
@@ -324,16 +306,16 @@ function PasswordUpdateSection({ darkMode }) {
           style={{
             padding: '12px 14px',
             borderRadius: '8px',
-            border: `1px solid ${inputBorder}`,
-            background: inputBg,
-            color: textMain,
+            border: '1px solid #dcd4c7',
+            background: '#fbf9f6',
+            color: '#221f1c',
             flex: '1',
             minWidth: '220px',
             outline: 'none',
             fontSize: '13.5px'
           }}
-          onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-          onBlur={(e) => e.target.style.borderColor = inputBorder}
+          onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+          onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
         />
         <input
           type="password"
@@ -344,24 +326,24 @@ function PasswordUpdateSection({ darkMode }) {
           style={{
             padding: '12px 14px',
             borderRadius: '8px',
-            border: `1px solid ${inputBorder}`,
-            background: inputBg,
-            color: textMain,
+            border: '1px solid #dcd4c7',
+            background: '#fbf9f6',
+            color: '#221f1c',
             flex: '1',
             minWidth: '280px',
             outline: 'none',
             fontSize: '13.5px'
           }}
-          onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-          onBlur={(e) => e.target.style.borderColor = inputBorder}
+          onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+          onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
         />
         <button
           type="submit"
           disabled={submitting}
           style={{
             padding: '12px 22px',
-            background: primaryBtnBg,
-            color: primaryBtnText,
+            background: '#2c2825',
+            color: '#faf8f4',
             border: 'none',
             borderRadius: '8px',
             cursor: submitting ? 'not-allowed' : 'pointer',

@@ -4,15 +4,7 @@ CREATE DATABASE IF NOT EXISTS roxiler_app;
 
 USE roxiler_app;
 
--- 2. DROP EXISTING TABLES
-
-DROP TABLE IF EXISTS audit_logs;
-DROP TABLE IF EXISTS ratings;
-DROP TABLE IF EXISTS stores;
-DROP TABLE IF EXISTS users;
-
-
--- 3. CREATE USERS TABLE
+-- 2. CREATE USERS TABLE
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,8 +21,7 @@ CREATE TABLE users (
     CHECK (CHAR_LENGTH(name) >= 20)
 );
 
-
--- 4. CREATE STORES TABLE
+-- 3. CREATE STORES TABLE
 
 CREATE TABLE stores (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,8 +38,7 @@ CREATE TABLE stores (
         ON UPDATE CASCADE
 );
 
-
--- 5. CREATE RATINGS TABLE
+-- 4. CREATE RATINGS TABLE
 
 CREATE TABLE ratings (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -72,8 +62,7 @@ CREATE TABLE ratings (
         ON UPDATE CASCADE
 );
 
-
--- 6. CREATE AUDIT LOGS TABLE
+-- 5. CREATE AUDIT LOGS TABLE
 
 CREATE TABLE audit_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,11 +74,10 @@ CREATE TABLE audit_logs (
     changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 6. CREATE AUDIT TRIGGERS
 
--- 7. CREATE AUDIT TRIGGERS
 
 DELIMITER $$
-
 
 -- USERS TABLE TRIGGERS
 
@@ -159,7 +147,6 @@ BEGIN
     );
 END$$
 
-
 -- STORES TABLE TRIGGERS
 
 CREATE TRIGGER stores_after_insert
@@ -180,7 +167,6 @@ BEGIN
         )
     );
 END$$
-
 
 CREATE TRIGGER stores_after_update
 AFTER UPDATE ON stores
@@ -208,7 +194,6 @@ BEGIN
     );
 END$$
 
-
 CREATE TRIGGER stores_after_delete
 AFTER DELETE ON stores
 FOR EACH ROW
@@ -227,7 +212,6 @@ BEGIN
         )
     );
 END$$
-
 
 -- RATINGS TABLE TRIGGERS
 
@@ -248,7 +232,6 @@ BEGIN
         )
     );
 END$$
-
 
 CREATE TRIGGER ratings_after_update
 AFTER UPDATE ON ratings
@@ -274,7 +257,6 @@ BEGIN
     );
 END$$
 
-
 CREATE TRIGGER ratings_after_delete
 AFTER DELETE ON ratings
 FOR EACH ROW
@@ -293,63 +275,3 @@ BEGIN
     );
 END$$
 
-
-DELIMITER ;
-
-
--- 8. INSERT SAMPLE USERS
-
-
-INSERT INTO users (id, name, email, password_hash, address, role)
-VALUES
-(2, 'Sultan System Administrator', 'sultan.admin@roxiler.com',
- '$2b$10$n8VFEXvn3Aj6QfZA9Xmegul4UJLJD6hvXnKdVjMAzg/RMGeuNZzTG',
- 'Central Admin Plaza, Pune City', 'SYSTEM_ADMIN'),
-
-(3, 'Alex Store Owner Account', 'alex.owner@example.com',
- '$2b$10$8WqvIggQkWXMBrRTuPXRMeSck6P72imwRQhzUAUmmvuV1xH7t/Hri',
- 'Pune, Maharashtra, India', 'STORE_OWNER'),
-
-(4, 'Alex Regular Customer User', 'alex.customer@example.com',
- '$2b$10$x5NHx8RPTOWE36Y41IPPKOR3CIYYpZO1IJNbtmKUVRb8di8sck67.',
- 'Hinjewadi, Pune, India', 'NORMAL_USER'),
-
-(5, 'Alex Regular User Account', 'alex.user@example.com',
- '$2b$10$UUZdpF4ISbrKL4BUx5hF.unsEIFDZBhtAtniXbhtfYaCDGHeuY4em',
- 'Jodhpur, India', 'NORMAL_USER');
-
-
--- 9. INSERT SAMPLE STORES
-
-INSERT INTO stores (id, owner_id, name, email, address)
-VALUES
-(2, NULL, 'Alex Central Retail Store',
- 'alex.store@example.com', 'Pune, India'),
-
-(3, 3, 'Alex Corner Grocery Store',
- 'alex.owner@example.com', 'Pune, Hinjewadi'),
-
-(4, NULL, 'Alex Marketplace Store',
- 'alex.market@example.com', 'Jodhpur, India');
-
-
--- 10. INSERT SAMPLE RATINGS
-
-INSERT INTO ratings (id, user_id, store_id, rating)
-VALUES
-(1, 4, 2, 4),
-(7, 4, 3, 5),
-(10, 5, 4, 3),
-(11, 5, 2, 2),
-(12, 5, 3, 3),
-(13, 4, 4, 2);
-
-
--- 11. VERIFY DATABASE
-
-SHOW TABLES;
-
-SELECT * FROM users;
-SELECT * FROM stores;
-SELECT * FROM ratings;
-SELECT * FROM audit_logs;

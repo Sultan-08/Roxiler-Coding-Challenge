@@ -1,6 +1,13 @@
-# Roxiler Store Rating Application :
+# Roxiler's - Store Rating Application 🏪
 
-A full-stack web application built for the **Roxiler Coding Challenge** that allows users to browse stores and submit ratings, store owners to monitor their store performance, and system admins to manage the entire platform.
+A full-stack web application that allows users to browse stores and submit ratings, store owners to monitor their store performance, and system admins to manage the entire platform.
+
+![React](https://img.shields.io/badge/React-19-blue)
+![NodeJS](https://img.shields.io/badge/Node.js-20-green)
+![Express](https://img.shields.io/badge/Express.js-black)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
+![JWT](https://img.shields.io/badge/JWT-blue)
+![Bcrypt](https://img.shields.io/badge/Bcrypt-yellow)
 
 ---
 
@@ -18,21 +25,21 @@ A full-stack web application built for the **Roxiler Coding Challenge** that all
 ## Features :
 
 ### 🔐 Authentication -
-- User signup & login with JWT-based authentication
-- Role-based access control (RBAC) with three roles
-- Password update support
+- User signup & login with JWT-based authentication.
+- Role-based access control (RBAC) with three roles.
+- Password update support.
 
 ### 👤 Normal User -
-- Browse all registered stores
-- Submit or update a rating (1–5 stars) for any store
+- Browse all registered stores.
+- Submit or update a rating (1–5 stars) for any store.
 
 ### 🏪 Store Owner -
-- View own store dashboard with average rating and individual ratings from users
+- View own store dashboard with average rating and individual ratings from users.
 
 ### 🛡️ System Admin -
-- View platform-wide dashboard stats (total users, stores, ratings)
-- List and search all users
-- Add new users with any role
+- View platform-wide dashboard stats (total users, stores, ratings).
+- List and search all users.
+- Add new users with any role.
 
 ---
 
@@ -143,7 +150,6 @@ VITE_API_BASE_URL=http://localhost:3000/api
 
 ## Test Credentials -
 
-All test accounts use the password: `Sultan@12345`
 
 | Role | Email | Password |
 |------|-------|-------|

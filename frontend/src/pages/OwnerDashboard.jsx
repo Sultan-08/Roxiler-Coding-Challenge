@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config/api';
 
-export default function OwnerDashboard({ darkMode }) {
+export default function OwnerDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -32,33 +32,27 @@ export default function OwnerDashboard({ darkMode }) {
     fetchOwnerDashboard();
   }, [token, navigate]);
 
-  // Beige & Grey Palette
-  const bgCard = darkMode ? '#22201d' : '#ffffff';
-  const textMain = darkMode ? '#f4efe6' : '#221f1c';
-  const textMuted = darkMode ? '#9e978c' : '#756f66';
-  const borderCol = darkMode ? '#38352f' : '#e2dcd2';
-  const tableHeaderBg = darkMode ? '#1c1b18' : '#f0ebe1';
-  const tableBorder = darkMode ? '#35322d' : '#e8e2d7';
+  const boxShadow = '0 4px 16px -2px rgba(45,38,30,0.06)';
 
   return (
-    <div style={{ maxWidth: '1020px', margin: '0 auto', paddingBottom: '48px', color: textMain }}>
+    <div style={{ maxWidth: '1020px', margin: '0 auto', paddingBottom: '48px', color: '#221f1c' }}>
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
           <span style={{ fontSize: '20px' }}>🏪</span>
-          <h2 style={{ fontSize: '28px', fontWeight: '800', letterSpacing: '-0.02em', color: textMain }}>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', letterSpacing: '-0.02em', color: '#221f1c' }}>
             Store Owner Dashboard
           </h2>
         </div>
-        <p style={{ color: textMuted, fontSize: '14.5px' }}>
+        <p style={{ color: '#756f66', fontSize: '14.5px' }}>
           Monitor your store's overall performance, average customer rating, and individual feedback.
         </p>
       </div>
 
       {error && (
         <div style={{
-          color: darkMode ? '#fca5a5' : '#a82e22',
-          background: darkMode ? '#321d1b' : '#faedeb',
-          border: `1px solid ${darkMode ? '#542823' : '#f0cdc9'}`,
+          color: '#a82e22',
+          background: '#faedeb',
+          border: '1px solid #f0cdc9',
           padding: '12px 16px',
           borderRadius: '10px',
           marginBottom: '24px',
@@ -73,10 +67,10 @@ export default function OwnerDashboard({ darkMode }) {
         <div style={{
           textAlign: 'center',
           padding: '48px',
-          background: bgCard,
+          background: '#ffffff',
           borderRadius: '14px',
-          border: `1px solid ${borderCol}`,
-          color: textMuted
+          border: '1px solid #e2dcd2',
+          color: '#756f66'
         }}>
           <p style={{ fontSize: '15px' }}>Loading dashboard data...</p>
         </div>
@@ -84,10 +78,10 @@ export default function OwnerDashboard({ darkMode }) {
         <div style={{
           textAlign: 'center',
           padding: '48px',
-          background: bgCard,
+          background: '#ffffff',
           borderRadius: '14px',
-          border: `1px solid ${borderCol}`,
-          color: textMuted
+          border: '1px solid #e2dcd2',
+          color: '#756f66'
         }}>
           <p style={{ fontSize: '15px' }}>No store information available.</p>
         </div>
@@ -96,10 +90,10 @@ export default function OwnerDashboard({ darkMode }) {
           {/* Store Info & Average Rating Card */}
           <div style={{
             padding: '28px',
-            backgroundColor: bgCard,
+            backgroundColor: '#ffffff',
             borderRadius: '14px',
-            border: `1px solid ${borderCol}`,
-            boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 16px -2px rgba(45,38,30,0.06)',
+            border: '1px solid #e2dcd2',
+            boxShadow,
             marginBottom: '28px',
             display: 'flex',
             justifyContent: 'space-between',
@@ -111,7 +105,7 @@ export default function OwnerDashboard({ darkMode }) {
               <span style={{
                 fontSize: '12px',
                 fontWeight: '700',
-                color: textMuted,
+                color: '#756f66',
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
                 display: 'block',
@@ -119,52 +113,52 @@ export default function OwnerDashboard({ darkMode }) {
               }}>
                 Store Profile
               </span>
-              <p style={{ fontSize: '26px', fontWeight: '800', color: textMain, letterSpacing: '-0.02em', marginBottom: '6px' }}>
+              <p style={{ fontSize: '26px', fontWeight: '800', color: '#221f1c', letterSpacing: '-0.02em', marginBottom: '6px' }}>
                 {dashboardData.store_info?.name || 'Your Store'}
               </p>
-              <p style={{ fontSize: '13.5px', color: textMuted }}>
+              <p style={{ fontSize: '13.5px', color: '#756f66' }}>
                 📍 {dashboardData.store_info?.address || 'Address registered'}
               </p>
             </div>
 
             <div style={{
               padding: '14px 24px',
-              background: darkMode ? '#2c271f' : '#f5eee3',
+              background: '#f5eee3',
               borderRadius: '12px',
-              border: `1px solid ${darkMode ? '#423a2d' : '#e6dbca'}`,
+              border: '1px solid #e6dbca',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               minWidth: '200px'
             }}>
-              <span style={{ fontSize: '11.5px', fontWeight: '700', textTransform: 'uppercase', color: textMuted, letterSpacing: '0.05em', marginBottom: '4px' }}>
+              <span style={{ fontSize: '11.5px', fontWeight: '700', textTransform: 'uppercase', color: '#756f66', letterSpacing: '0.05em', marginBottom: '4px' }}>
                 Average Rating
               </span>
               <span style={{ fontSize: '22px', fontWeight: '800', color: '#c58928' }}>
-                ⭐ {dashboardData.store_info?.average_rating || 0} <span style={{ fontSize: '15px', color: textMuted, fontWeight: '500' }}>/ 5</span>
+                ⭐ {dashboardData.store_info?.average_rating || 0} <span style={{ fontSize: '15px', color: '#756f66', fontWeight: '500' }}>/ 5</span>
               </span>
             </div>
           </div>
 
           {/* Raters List Table */}
           <div style={{
-            backgroundColor: bgCard,
+            backgroundColor: '#ffffff',
             borderRadius: '14px',
-            border: `1px solid ${borderCol}`,
-            boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 16px -2px rgba(45,38,30,0.06)',
+            border: '1px solid #e2dcd2',
+            boxShadow,
             overflow: 'hidden',
             marginBottom: '32px'
           }}>
-            <div style={{ padding: '20px 26px', borderBottom: `1px solid ${borderCol}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '20px 26px', borderBottom: '1px solid #e2dcd2', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '700', color: textMain }}>Customers Who Rated Your Store</h3>
-                <p style={{ fontSize: '13px', color: textMuted, marginTop: '2px' }}>Detailed feedback and scores submitted by verified users</p>
+                <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#221f1c' }}>Customers Who Rated Your Store</h3>
+                <p style={{ fontSize: '13px', color: '#756f66', marginTop: '2px' }}>Detailed feedback and scores submitted by verified users</p>
               </div>
               <span style={{
                 fontSize: '12px',
                 fontWeight: '600',
-                background: darkMode ? '#2d2a25' : '#ede7dc',
-                color: textMuted,
+                background: '#ede7dc',
+                color: '#756f66',
                 padding: '4px 10px',
                 borderRadius: '20px'
               }}>
@@ -173,34 +167,34 @@ export default function OwnerDashboard({ darkMode }) {
             </div>
 
             {!dashboardData.raters || dashboardData.raters.length === 0 ? (
-              <p style={{ color: textMuted, textAlign: 'center', padding: '40px', fontSize: '14px' }}>
+              <p style={{ color: '#756f66', textAlign: 'center', padding: '40px', fontSize: '14px' }}>
                 No ratings received yet. Wait till customers rates your store.
               </p>
             ) : (
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13.5px' }}>
                   <thead>
-                    <tr style={{ backgroundColor: tableHeaderBg, color: textMuted, textTransform: 'uppercase', fontSize: '11.5px', letterSpacing: '0.04em' }}>
-                      <th style={{ padding: '14px 24px', borderBottom: `1px solid ${tableBorder}` }}>Customer Name</th>
-                      <th style={{ padding: '14px 24px', borderBottom: `1px solid ${tableBorder}` }}>Email</th>
-                      <th style={{ padding: '14px 24px', borderBottom: `1px solid ${tableBorder}` }}>Rating</th>
-                      <th style={{ padding: '14px 24px', borderBottom: `1px solid ${tableBorder}` }}>Date</th>
+                    <tr style={{ backgroundColor: '#f0ebe1', color: '#756f66', textTransform: 'uppercase', fontSize: '11.5px', letterSpacing: '0.04em' }}>
+                      <th style={{ padding: '14px 24px', borderBottom: '1px solid #e8e2d7' }}>Customer Name</th>
+                      <th style={{ padding: '14px 24px', borderBottom: '1px solid #e8e2d7' }}>Email</th>
+                      <th style={{ padding: '14px 24px', borderBottom: '1px solid #e8e2d7' }}>Rating</th>
+                      <th style={{ padding: '14px 24px', borderBottom: '1px solid #e8e2d7' }}>Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {dashboardData.raters.map((rater, index) => (
                       <tr
                         key={index}
-                        style={{ borderTop: `1px solid ${tableBorder}`, transition: 'background-color 0.15s ease' }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = darkMode ? '#282521' : '#faf7f2'}
+                        style={{ borderTop: '1px solid #e8e2d7', transition: 'background-color 0.15s ease' }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#faf7f2'}
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                       >
-                        <td style={{ padding: '14px 24px', fontWeight: '600', color: textMain }}>{rater.name}</td>
-                        <td style={{ padding: '14px 24px', color: textMuted }}>{rater.email}</td>
+                        <td style={{ padding: '14px 24px', fontWeight: '600', color: '#221f1c' }}>{rater.name}</td>
+                        <td style={{ padding: '14px 24px', color: '#756f66' }}>{rater.email}</td>
                         <td style={{ padding: '14px 24px', fontWeight: '700', color: '#c58928' }}>
                           ⭐ {rater.rating} / 5
                         </td>
-                        <td style={{ padding: '14px 24px', color: textMuted }}>
+                        <td style={{ padding: '14px 24px', color: '#756f66' }}>
                           {new Date(rater.rated_on).toLocaleDateString()}
                         </td>
                       </tr>
@@ -214,12 +208,12 @@ export default function OwnerDashboard({ darkMode }) {
       )}
 
       {/* Password Update Section */}
-      <PasswordUpdateSection darkMode={darkMode} />
+      <PasswordUpdateSection />
     </div>
   );
 }
 
-function PasswordUpdateSection({ darkMode }) {
+function PasswordUpdateSection() {
   const [passData, setPassData] = useState({ oldPassword: '', newPassword: '' });
   const [msg, setMsg] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -245,35 +239,26 @@ function PasswordUpdateSection({ darkMode }) {
     }
   };
 
-  const bgCard = darkMode ? '#22201d' : '#ffffff';
-  const textMain = darkMode ? '#f4efe6' : '#221f1c';
-  const textMuted = darkMode ? '#9e978c' : '#756f66';
-  const borderCol = darkMode ? '#38352f' : '#e2dcd2';
-  const inputBg = darkMode ? '#1a1917' : '#fbf9f6';
-  const inputBorder = darkMode ? '#3d3932' : '#dcd4c7';
-  const primaryBtnBg = darkMode ? '#d5c7b3' : '#2c2825';
-  const primaryBtnText = darkMode ? '#1c1a17' : '#faf8f4';
-
   return (
     <div style={{
       padding: '28px',
-      background: bgCard,
+      background: '#ffffff',
       borderRadius: '14px',
-      border: `1px solid ${borderCol}`,
-      boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 16px -2px rgba(45,38,30,0.06)'
+      border: '1px solid #e2dcd2',
+      boxShadow: '0 4px 16px -2px rgba(45,38,30,0.06)'
     }}>
-      <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '6px', color: textMain }}>
+      <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '6px', color: '#221f1c' }}>
         Update Password
       </h4>
-      <p style={{ color: textMuted, fontSize: '13px', marginBottom: '18px' }}>
+      <p style={{ color: '#756f66', fontSize: '13px', marginBottom: '18px' }}>
         Change your account security password (8-16 characters, 1 uppercase, 1 special character).
       </p>
 
       {msg && (
         <div style={{
-          color: isSuccess ? (darkMode ? '#86efac' : '#2f592a') : (darkMode ? '#fca5a5' : '#a82e22'),
-          background: isSuccess ? (darkMode ? '#172b1a' : '#edf5ec') : (darkMode ? '#321d1b' : '#faedeb'),
-          border: `1px solid ${isSuccess ? (darkMode ? '#2c5230' : '#c8e0c6') : (darkMode ? '#542823' : '#f0cdc9')}`,
+          color: isSuccess ? '#2f592a' : '#a82e22',
+          background: isSuccess ? '#edf5ec' : '#faedeb',
+          border: `1px solid ${isSuccess ? '#c8e0c6' : '#f0cdc9'}`,
           padding: '11px 14px',
           borderRadius: '8px',
           marginBottom: '16px',
@@ -294,16 +279,16 @@ function PasswordUpdateSection({ darkMode }) {
           style={{
             padding: '12px 14px',
             borderRadius: '8px',
-            border: `1px solid ${inputBorder}`,
-            background: inputBg,
-            color: textMain,
+            border: '1px solid #dcd4c7',
+            background: '#fbf9f6',
+            color: '#221f1c',
             flex: '1',
             minWidth: '220px',
             outline: 'none',
             fontSize: '13.5px'
           }}
-          onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-          onBlur={(e) => e.target.style.borderColor = inputBorder}
+          onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+          onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
         />
         <input
           type="password"
@@ -314,24 +299,24 @@ function PasswordUpdateSection({ darkMode }) {
           style={{
             padding: '12px 14px',
             borderRadius: '8px',
-            border: `1px solid ${inputBorder}`,
-            background: inputBg,
-            color: textMain,
+            border: '1px solid #dcd4c7',
+            background: '#fbf9f6',
+            color: '#221f1c',
             flex: '1',
             minWidth: '280px',
             outline: 'none',
             fontSize: '13.5px'
           }}
-          onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-          onBlur={(e) => e.target.style.borderColor = inputBorder}
+          onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+          onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
         />
         <button
           type="submit"
           disabled={submitting}
           style={{
             padding: '12px 22px',
-            background: primaryBtnBg,
-            color: primaryBtnText,
+            background: '#2c2825',
+            color: '#faf8f4',
             border: 'none',
             borderRadius: '8px',
             cursor: submitting ? 'not-allowed' : 'pointer',

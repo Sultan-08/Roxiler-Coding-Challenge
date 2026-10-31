@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config/api';
 
-export default function Signup({ darkMode }) {
+export default function Signup() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', address: '', role: 'NORMAL_USER' });
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -45,60 +45,34 @@ export default function Signup({ darkMode }) {
     }
   };
 
-  // Beige & Grey Palette
-  const bgCard = darkMode ? '#22201d' : '#ffffff';
-  const textMain = darkMode ? '#f4efe6' : '#221f1c';
-  const textMuted = darkMode ? '#9e978c' : '#756f66';
-  const borderCol = darkMode ? '#38352f' : '#e2dcd2';
-  const inputBg = darkMode ? '#1a1917' : '#fbf9f6';
-  const inputBorder = darkMode ? '#3d3932' : '#dcd4c7';
-  const primaryBtnBg = darkMode ? '#d5c7b3' : '#2c2825';
-  const primaryBtnText = darkMode ? '#1c1a17' : '#faf8f4';
-  const linkCol = darkMode ? '#d5c7b3' : '#453c30';
-
   return (
     <div style={{
       maxWidth: '460px',
       margin: '40px auto',
       padding: '36px 32px',
-      backgroundColor: bgCard,
+      backgroundColor: '#ffffff',
       borderRadius: '16px',
-      border: `1px solid ${borderCol}`,
-      boxShadow: darkMode ? '0 10px 30px rgba(0,0,0,0.35)' : '0 10px 25px -4px rgba(45,38,30,0.08)',
-      color: textMain,
-      transition: 'all 0.25s ease'
+      border: '1px solid #e2dcd2',
+      boxShadow: '0 10px 25px -4px rgba(45,38,30,0.08)',
+      color: '#221f1c',
     }}>
       <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '44px',
-          height: '44px',
-          borderRadius: '12px',
-          background: darkMode ? '#2d2a25' : '#f1ede5',
-          border: `1px solid ${borderCol}`,
-          fontSize: '20px',
-          marginBottom: '12px'
-        }}>
-          📝
-        </div>
-        <h2 style={{ fontSize: '24px', fontWeight: '800', color: textMain, letterSpacing: '-0.02em', marginBottom: '6px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#221f1c', letterSpacing: '-0.02em', marginBottom: '6px' }}>
           Create an Account
         </h2>
-        <p style={{ color: textMuted, fontSize: '13px' }}>
-          Join Store Rating Portal to manage or rate stores.
+        <p style={{ color: '#756f66', fontSize: '13px' }}>
+          Join Store Rating Application.
         </p>
       </div>
 
       {message && (
         <div style={{
-          color: isSuccess ? (darkMode ? '#86efac' : '#2f592a') : (darkMode ? '#fca5a5' : '#a82e22'),
+          color: isSuccess ? '#2f592a' : '#a82e22',
           textAlign: 'center',
           marginBottom: '18px',
           fontWeight: '500',
-          background: isSuccess ? (darkMode ? '#172b1a' : '#edf5ec') : (darkMode ? '#321d1b' : '#faedeb'),
-          border: `1px solid ${isSuccess ? (darkMode ? '#2c5230' : '#c8e0c6') : (darkMode ? '#542823' : '#f0cdc9')}`,
+          background: isSuccess ? '#edf5ec' : '#faedeb',
+          border: `1px solid ${isSuccess ? '#c8e0c6' : '#f0cdc9'}`,
           padding: '11px 14px',
           borderRadius: '8px',
           fontSize: '13px'
@@ -109,12 +83,12 @@ export default function Signup({ darkMode }) {
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: textMuted }}>
+          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: '#756f66' }}>
             Full Name <span style={{ fontSize: '11px', fontWeight: 'normal' }}>(20-60 characters)</span>
           </label>
           <input
             type="text"
-            placeholder="e.g. Alex Regular Customer User"
+            placeholder="Enter full name"
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -122,24 +96,24 @@ export default function Signup({ darkMode }) {
               width: '100%',
               padding: '11px 13px',
               borderRadius: '8px',
-              border: `1px solid ${inputBorder}`,
-              background: inputBg,
-              color: textMain,
+              border: '1px solid #dcd4c7',
+              background: '#fbf9f6',
+              color: '#221f1c',
               outline: 'none',
               fontSize: '13.5px'
             }}
-            onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-            onBlur={(e) => e.target.style.borderColor = inputBorder}
+            onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+            onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: textMuted }}>
+          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: '#756f66' }}>
             Email Address
           </label>
           <input
             type="email"
-            placeholder="e.g. alex.customer@example.com"
+            placeholder="Enter email address"
             required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -147,19 +121,19 @@ export default function Signup({ darkMode }) {
               width: '100%',
               padding: '11px 13px',
               borderRadius: '8px',
-              border: `1px solid ${inputBorder}`,
-              background: inputBg,
-              color: textMain,
+              border: '1px solid #dcd4c7',
+              background: '#fbf9f6',
+              color: '#221f1c',
               outline: 'none',
               fontSize: '13.5px'
             }}
-            onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-            onBlur={(e) => e.target.style.borderColor = inputBorder}
+            onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+            onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: textMuted }}>
+          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: '#756f66' }}>
             Password <span style={{ fontSize: '11px', fontWeight: 'normal' }}>(8-16 chars, 1 Uppercase, 1 Special)</span>
           </label>
           <input
@@ -172,43 +146,43 @@ export default function Signup({ darkMode }) {
               width: '100%',
               padding: '11px 13px',
               borderRadius: '8px',
-              border: `1px solid ${inputBorder}`,
-              background: inputBg,
-              color: textMain,
+              border: '1px solid #dcd4c7',
+              background: '#fbf9f6',
+              color: '#221f1c',
               outline: 'none',
               fontSize: '13.5px'
             }}
-            onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-            onBlur={(e) => e.target.style.borderColor = inputBorder}
+            onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+            onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: textMuted }}>
+          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: '#756f66' }}>
             Address <span style={{ fontSize: '11px', fontWeight: 'normal' }}>(Max 400 characters)</span>
           </label>
           <input
             type="text"
-            placeholder="e.g. 100 Main St, Suite 4B, Metro City"
+            placeholder="Enter your address"
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
             style={{
               width: '100%',
               padding: '11px 13px',
               borderRadius: '8px',
-              border: `1px solid ${inputBorder}`,
-              background: inputBg,
-              color: textMain,
+              border: '1px solid #dcd4c7',
+              background: '#fbf9f6',
+              color: '#221f1c',
               outline: 'none',
               fontSize: '13.5px'
             }}
-            onFocus={(e) => e.target.style.borderColor = darkMode ? '#d5c7b3' : '#2c2825'}
-            onBlur={(e) => e.target.style.borderColor = inputBorder}
+            onFocus={(e) => e.target.style.borderColor = '#2c2825'}
+            onBlur={(e) => e.target.style.borderColor = '#dcd4c7'}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: textMuted }}>
+          <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '600', marginBottom: '5px', color: '#756f66' }}>
             Account Role
           </label>
           <select
@@ -218,9 +192,9 @@ export default function Signup({ darkMode }) {
               width: '100%',
               padding: '11px 13px',
               borderRadius: '8px',
-              border: `1px solid ${inputBorder}`,
-              background: inputBg,
-              color: textMain,
+              border: '1px solid #dcd4c7',
+              background: '#fbf9f6',
+              color: '#221f1c',
               outline: 'none',
               fontSize: '13.5px'
             }}
@@ -237,8 +211,8 @@ export default function Signup({ darkMode }) {
           style={{
             width: '100%',
             padding: '12px',
-            backgroundColor: primaryBtnBg,
-            color: primaryBtnText,
+            backgroundColor: '#2c2825',
+            color: '#faf8f4',
             border: 'none',
             borderRadius: '9px',
             cursor: loading ? 'not-allowed' : 'pointer',
@@ -253,9 +227,9 @@ export default function Signup({ darkMode }) {
         </button>
       </form>
 
-      <p style={{ textAlign: 'center', marginTop: '22px', color: textMuted, fontSize: '13.5px' }}>
+      <p style={{ textAlign: 'center', marginTop: '22px', color: '#756f66', fontSize: '13.5px' }}>
         Already have an account?{' '}
-        <Link to="/login" style={{ color: linkCol, fontWeight: '700', textDecoration: 'underline' }}>
+        <Link to="/login" style={{ color: '#453c30', fontWeight: '700', textDecoration: 'underline' }}>
           Sign In
         </Link>
       </p>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config/api';
 
-export default function AdminDashboard({ darkMode }) {
+export default function AdminDashboard() {
   const [stats, setStats] = useState({ total_users: 0, total_stores: 0, total_ratings: 0 });
   const [stores, setStores] = useState([]);
   const [users, setUsers] = useState([]);
@@ -124,54 +124,30 @@ export default function AdminDashboard({ darkMode }) {
     }
   };
 
-  // Beige and Grey Theme Palette
-  const bgCard = darkMode ? '#22201d' : '#ffffff';
-  const textMain = darkMode ? '#f4efe6' : '#221f1c';
-  const textMuted = darkMode ? '#9e978c' : '#756f66';
-  const borderCol = darkMode ? '#38352f' : '#e2dcd2';
-  const inputBg = darkMode ? '#1a1917' : '#fbf9f6';
-  const inputBorder = darkMode ? '#3d3932' : '#dcd4c7';
-  const primaryBtnBg = darkMode ? '#d5c7b3' : '#2c2825';
-  const primaryBtnText = darkMode ? '#1c1a17' : '#faf8f4';
-  const secondaryBtnBg = darkMode ? '#3b3731' : '#453f38';
-  const secondaryBtnText = darkMode ? '#f4efe6' : '#faf8f4';
-  const tableHeaderBg = darkMode ? '#1c1b18' : '#f0ebe1';
-  const tableBorder = darkMode ? '#35322d' : '#e8e2d7';
-
-  // Role Badge Helper in Beige & Grey
+  // Role Badge Helper
   const getRoleBadge = (role) => {
     if (role === 'SYSTEM_ADMIN') {
-      return {
-        bg: darkMode ? '#38342e' : '#2c2825',
-        color: darkMode ? '#f4efe6' : '#faf7f2',
-        border: darkMode ? '#4a443c' : '#2c2825'
-      };
+      return { bg: '#2c2825', color: '#faf7f2', border: '#2c2825' };
     }
     if (role === 'STORE_OWNER') {
-      return {
-        bg: darkMode ? '#322b22' : '#ebe2d5',
-        color: darkMode ? '#dfd2c0' : '#453a2d',
-        border: darkMode ? '#473d30' : '#ddcebc'
-      };
+      return { bg: '#ebe2d5', color: '#453a2d', border: '#ddcebc' };
     }
-    return {
-      bg: darkMode ? '#262421' : '#ede9e1',
-      color: darkMode ? '#c7bfb2' : '#4a443b',
-      border: darkMode ? '#383530' : '#ded7cb'
-    };
+    return { bg: '#ede9e1', color: '#4a443b', border: '#ded7cb' };
   };
 
+  const boxShadow = '0 4px 14px -2px rgba(45,38,30,0.05)';
+
   return (
-    <div style={{ maxWidth: '1280px', margin: '0 auto', paddingBottom: '48px', color: textMain }}>
+    <div style={{ maxWidth: '1280px', margin: '0 auto', paddingBottom: '48px', color: '#221f1c' }}>
       
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
           <span style={{ fontSize: '22px' }}>⚙️</span>
-          <h2 style={{ fontSize: '28px', fontWeight: '800', letterSpacing: '-0.02em', color: textMain }}>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', letterSpacing: '-0.02em', color: '#221f1c' }}>
             System Administrator Dashboard
           </h2>
         </div>
-        <p style={{ color: textMuted, fontSize: '14.5px' }}>
+        <p style={{ color: '#756f66', fontSize: '14.5px' }}>
           Manage platform analytics, register stores, invite users, and review filtered directories.
         </p>
       </div>
@@ -179,9 +155,9 @@ export default function AdminDashboard({ darkMode }) {
       {message && (
         <div style={{ 
           padding: '12px 18px', 
-          background: isSuccess ? (darkMode ? '#172b1a' : '#edf5ec') : (darkMode ? '#321d1b' : '#faedeb'), 
-          color: isSuccess ? (darkMode ? '#86efac' : '#2f592a') : (darkMode ? '#fca5a5' : '#a82e22'), 
-          border: `1px solid ${isSuccess ? (darkMode ? '#2c5230' : '#c8e0c6') : (darkMode ? '#542823' : '#f0cdc9')}`,
+          background: isSuccess ? '#edf5ec' : '#faedeb', 
+          color: isSuccess ? '#2f592a' : '#a82e22', 
+          border: `1px solid ${isSuccess ? '#c8e0c6' : '#f0cdc9'}`,
           borderRadius: '10px', 
           marginBottom: '24px', 
           fontWeight: '600',
@@ -193,53 +169,35 @@ export default function AdminDashboard({ darkMode }) {
 
       {/* Analytics Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
-        <div style={{ 
-          background: bgCard, 
-          padding: '24px', 
-          borderRadius: '14px', 
-          border: `1px solid ${borderCol}`,
-          boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-        }}>
+        <div style={{ background: '#ffffff', padding: '24px', borderRadius: '14px', border: '1px solid #e2dcd2', boxShadow }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <p style={{ color: textMuted, fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <p style={{ color: '#756f66', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Total Users
             </p>
             <span style={{ fontSize: '18px' }}>👥</span>
           </div>
-          <h3 style={{ fontSize: '34px', fontWeight: '800', color: textMain, marginTop: '8px', letterSpacing: '-0.03em' }}>
+          <h3 style={{ fontSize: '34px', fontWeight: '800', color: '#221f1c', marginTop: '8px', letterSpacing: '-0.03em' }}>
             {stats.total_users}
           </h3>
-          <p style={{ fontSize: '12px', color: textMuted, marginTop: '4px' }}>Registered platform accounts</p>
+          <p style={{ fontSize: '12px', color: '#756f66', marginTop: '4px' }}>Registered platform accounts</p>
         </div>
 
-        <div style={{ 
-          background: bgCard, 
-          padding: '24px', 
-          borderRadius: '14px', 
-          border: `1px solid ${borderCol}`,
-          boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-        }}>
+        <div style={{ background: '#ffffff', padding: '24px', borderRadius: '14px', border: '1px solid #e2dcd2', boxShadow }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <p style={{ color: textMuted, fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <p style={{ color: '#756f66', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Total Stores
             </p>
             <span style={{ fontSize: '18px' }}>🏬</span>
           </div>
-          <h3 style={{ fontSize: '34px', fontWeight: '800', color: textMain, marginTop: '8px', letterSpacing: '-0.03em' }}>
+          <h3 style={{ fontSize: '34px', fontWeight: '800', color: '#221f1c', marginTop: '8px', letterSpacing: '-0.03em' }}>
             {stats.total_stores}
           </h3>
-          <p style={{ fontSize: '12px', color: textMuted, marginTop: '4px' }}>Active retail store listings</p>
+          <p style={{ fontSize: '12px', color: '#756f66', marginTop: '4px' }}>Active retail store listings</p>
         </div>
 
-        <div style={{ 
-          background: bgCard, 
-          padding: '24px', 
-          borderRadius: '14px', 
-          border: `1px solid ${borderCol}`,
-          boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-        }}>
+        <div style={{ background: '#ffffff', padding: '24px', borderRadius: '14px', border: '1px solid #e2dcd2', boxShadow }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <p style={{ color: textMuted, fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <p style={{ color: '#756f66', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Total Ratings
             </p>
             <span style={{ fontSize: '18px' }}>⭐</span>
@@ -247,23 +205,17 @@ export default function AdminDashboard({ darkMode }) {
           <h3 style={{ fontSize: '34px', fontWeight: '800', color: '#c58928', marginTop: '8px', letterSpacing: '-0.03em' }}>
             {stats.total_ratings}
           </h3>
-          <p style={{ fontSize: '12px', color: textMuted, marginTop: '4px' }}>Customer submitted scores</p>
+          <p style={{ fontSize: '12px', color: '#756f66', marginTop: '4px' }}>Customer submitted scores</p>
         </div>
       </div>
 
       {/* Forms Section: Add Store & Add User */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', marginBottom: '32px' }}>
         {/* Add Store Card */}
-        <div style={{ 
-          background: bgCard, 
-          padding: '26px', 
-          borderRadius: '14px', 
-          border: `1px solid ${borderCol}`,
-          boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-        }}>
-          <div style={{ borderBottom: `1px solid ${borderCol}`, paddingBottom: '12px', marginBottom: '18px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: textMain }}>Add New Store</h3>
-            <p style={{ fontSize: '12.5px', color: textMuted, marginTop: '2px' }}>Register a new store into the directory</p>
+        <div style={{ background: '#ffffff', padding: '26px', borderRadius: '14px', border: '1px solid #e2dcd2', boxShadow }}>
+          <div style={{ borderBottom: '1px solid #e2dcd2', paddingBottom: '12px', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#221f1c' }}>Add New Store</h3>
+            <p style={{ fontSize: '12.5px', color: '#756f66', marginTop: '2px' }}>Register a new store into the directory</p>
           </div>
           <form onSubmit={handleAddStore} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <input 
@@ -272,7 +224,7 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={storeData.name} 
               onChange={(e) => setStoreData({...storeData, name: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <input 
               type="email" 
@@ -280,7 +232,7 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={storeData.email} 
               onChange={(e) => setStoreData({...storeData, email: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <input 
               type="text" 
@@ -288,14 +240,14 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={storeData.address} 
               onChange={(e) => setStoreData({...storeData, address: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <button 
               type="submit" 
               style={{ 
                 padding: '12px', 
-                background: primaryBtnBg, 
-                color: primaryBtnText, 
+                background: '#2c2825', 
+                color: '#faf8f4', 
                 border: 'none', 
                 borderRadius: '8px', 
                 fontWeight: '700', 
@@ -311,16 +263,10 @@ export default function AdminDashboard({ darkMode }) {
         </div>
 
         {/* Add User Card */}
-        <div style={{ 
-          background: bgCard, 
-          padding: '26px', 
-          borderRadius: '14px', 
-          border: `1px solid ${borderCol}`,
-          boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-        }}>
-          <div style={{ borderBottom: `1px solid ${borderCol}`, paddingBottom: '12px', marginBottom: '18px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: textMain }}>Add New User</h3>
-            <p style={{ fontSize: '12.5px', color: textMuted, marginTop: '2px' }}>Provision a new platform administrator, owner, or user</p>
+        <div style={{ background: '#ffffff', padding: '26px', borderRadius: '14px', border: '1px solid #e2dcd2', boxShadow }}>
+          <div style={{ borderBottom: '1px solid #e2dcd2', paddingBottom: '12px', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#221f1c' }}>Add New User</h3>
+            <p style={{ fontSize: '12.5px', color: '#756f66', marginTop: '2px' }}>Provision a new platform administrator, owner, or user</p>
           </div>
           <form onSubmit={handleAddUser} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <input 
@@ -329,7 +275,7 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={userData.name} 
               onChange={(e) => setUserData({...userData, name: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <input 
               type="email" 
@@ -337,7 +283,7 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={userData.email} 
               onChange={(e) => setUserData({...userData, email: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <input 
               type="password" 
@@ -345,7 +291,7 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={userData.password} 
               onChange={(e) => setUserData({...userData, password: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <input 
               type="text" 
@@ -353,12 +299,12 @@ export default function AdminDashboard({ darkMode }) {
               required 
               value={userData.address} 
               onChange={(e) => setUserData({...userData, address: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }} 
             />
             <select 
               value={userData.role} 
               onChange={(e) => setUserData({...userData, role: e.target.value})} 
-              style={{ padding: '11px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', outline: 'none', fontSize: '13.5px' }}
+              style={{ padding: '11px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', outline: 'none', fontSize: '13.5px' }}
             >
               <option value="NORMAL_USER">Normal User</option>
               <option value="STORE_OWNER">Store Owner</option>
@@ -368,8 +314,8 @@ export default function AdminDashboard({ darkMode }) {
               type="submit" 
               style={{ 
                 padding: '12px', 
-                background: secondaryBtnBg, 
-                color: secondaryBtnText, 
+                background: '#453f38', 
+                color: '#faf8f4', 
                 border: 'none', 
                 borderRadius: '8px', 
                 fontWeight: '700', 
@@ -385,17 +331,10 @@ export default function AdminDashboard({ darkMode }) {
       </div>
 
       {/* Filters Section */}
-      <div style={{ 
-        background: bgCard, 
-        padding: '22px 26px', 
-        borderRadius: '14px', 
-        border: `1px solid ${borderCol}`, 
-        marginBottom: '32px',
-        boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-      }}>
+      <div style={{ background: '#ffffff', padding: '22px 26px', borderRadius: '14px', border: '1px solid #e2dcd2', marginBottom: '32px', boxShadow }}>
         <div style={{ marginBottom: '14px' }}>
-          <h3 style={{ fontSize: '16.5px', fontWeight: '700', color: textMain }}>Filter Directories</h3>
-          <p style={{ fontSize: '12.5px', color: textMuted }}>Filter users and stores simultaneously by name, email, address, or role</p>
+          <h3 style={{ fontSize: '16.5px', fontWeight: '700', color: '#221f1c' }}>Filter Directories</h3>
+          <p style={{ fontSize: '12.5px', color: '#756f66' }}>Filter users and stores simultaneously by name, email, address, or role</p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
           <input 
@@ -403,26 +342,26 @@ export default function AdminDashboard({ darkMode }) {
             placeholder="Search by Name..." 
             value={filters.name} 
             onChange={(e) => setFilters({...filters, name: e.target.value})} 
-            style={{ padding: '10px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', fontSize: '13px', outline: 'none' }} 
+            style={{ padding: '10px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', fontSize: '13px', outline: 'none' }} 
           />
           <input 
             type="text" 
             placeholder="Search by Email..." 
             value={filters.email} 
             onChange={(e) => setFilters({...filters, email: e.target.value})} 
-            style={{ padding: '10px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', fontSize: '13px', outline: 'none' }} 
+            style={{ padding: '10px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', fontSize: '13px', outline: 'none' }} 
           />
           <input 
             type="text" 
             placeholder="Search by Address..." 
             value={filters.address} 
             onChange={(e) => setFilters({...filters, address: e.target.value})} 
-            style={{ padding: '10px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', fontSize: '13px', outline: 'none' }} 
+            style={{ padding: '10px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', fontSize: '13px', outline: 'none' }} 
           />
           <select 
             value={filters.role} 
             onChange={(e) => setFilters({...filters, role: e.target.value})} 
-            style={{ padding: '10px 14px', background: inputBg, border: `1px solid ${inputBorder}`, color: textMain, borderRadius: '8px', fontSize: '13px', outline: 'none' }}
+            style={{ padding: '10px 14px', background: '#fbf9f6', border: '1px solid #dcd4c7', color: '#221f1c', borderRadius: '8px', fontSize: '13px', outline: 'none' }}
           >
             <option value="">All Roles</option>
             <option value="NORMAL_USER">Normal User</option>
@@ -433,44 +372,30 @@ export default function AdminDashboard({ darkMode }) {
       </div>
 
       {/* Stores Directory Table (with Sorting) */}
-      <div style={{ 
-        background: bgCard, 
-        borderRadius: '14px', 
-        border: `1px solid ${borderCol}`, 
-        marginBottom: '32px', 
-        overflow: 'hidden',
-        boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-      }}>
-        <div style={{ padding: '20px 26px', borderBottom: `1px solid ${borderCol}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+      <div style={{ background: '#ffffff', borderRadius: '14px', border: '1px solid #e2dcd2', marginBottom: '32px', overflow: 'hidden', boxShadow }}>
+        <div style={{ padding: '20px 26px', borderBottom: '1px solid #e2dcd2', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: textMain }}>Registered Stores Listing</h3>
-            <p style={{ fontSize: '12.5px', color: textMuted }}>Click table column headers to sort ascending / descending</p>
+            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#221f1c' }}>Registered Stores Listing</h3>
+            <p style={{ fontSize: '12.5px', color: '#756f66' }}>Click table column headers to sort ascending / descending</p>
           </div>
-          <span style={{ 
-            fontSize: '12px', 
-            fontWeight: '600', 
-            background: darkMode ? '#2d2a25' : '#ede7dc', 
-            color: textMuted, 
-            padding: '4px 10px', 
-            borderRadius: '20px' 
-          }}>
+          <span style={{ fontSize: '12px', fontWeight: '600', background: '#ede7dc', color: '#756f66', padding: '4px 10px', borderRadius: '20px' }}>
             {stores.length} stores
           </span>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13.5px' }}>
             <thead>
-              <tr style={{ background: tableHeaderBg, color: textMuted, fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                <th onClick={() => handleStoreSort('name')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+              <tr style={{ background: '#f0ebe1', color: '#756f66', fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <th onClick={() => handleStoreSort('name')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Store Name {storeSort.field === 'name' ? (storeSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th onClick={() => handleStoreSort('email')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+                <th onClick={() => handleStoreSort('email')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Email {storeSort.field === 'email' ? (storeSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th onClick={() => handleStoreSort('address')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+                <th onClick={() => handleStoreSort('address')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Address {storeSort.field === 'address' ? (storeSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th onClick={() => handleStoreSort('overall_rating')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+                <th onClick={() => handleStoreSort('overall_rating')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Overall Rating {storeSort.field === 'overall_rating' ? (storeSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
               </tr>
@@ -478,7 +403,7 @@ export default function AdminDashboard({ darkMode }) {
             <tbody>
               {stores.length === 0 ? (
                 <tr>
-                  <td colSpan="4" style={{ padding: '30px', textAlign: 'center', color: textMuted }}>
+                  <td colSpan="4" style={{ padding: '30px', textAlign: 'center', color: '#756f66' }}>
                     No stores match the current filters.
                   </td>
                 </tr>
@@ -486,13 +411,13 @@ export default function AdminDashboard({ darkMode }) {
                 stores.map(store => (
                   <tr 
                     key={store.store_id} 
-                    style={{ borderTop: `1px solid ${tableBorder}`, transition: 'background-color 0.15s ease' }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = darkMode ? '#282521' : '#faf7f2'}
+                    style={{ borderTop: '1px solid #e8e2d7', transition: 'background-color 0.15s ease' }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#faf7f2'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   >
-                    <td style={{ padding: '14px 24px', fontWeight: '600', color: textMain }}>{store.name}</td>
-                    <td style={{ padding: '14px 24px', color: textMuted }}>{store.email}</td>
-                    <td style={{ padding: '14px 24px', color: textMuted }}>{store.address}</td>
+                    <td style={{ padding: '14px 24px', fontWeight: '600', color: '#221f1c' }}>{store.name}</td>
+                    <td style={{ padding: '14px 24px', color: '#756f66' }}>{store.email}</td>
+                    <td style={{ padding: '14px 24px', color: '#756f66' }}>{store.address}</td>
                     <td style={{ padding: '14px 24px', fontWeight: '700', color: '#c58928' }}>
                       ⭐ {store.overall_rating || 0} / 5
                     </td>
@@ -505,52 +430,39 @@ export default function AdminDashboard({ darkMode }) {
       </div>
 
       {/* Users Directory Table (with Sorting) */}
-      <div style={{ 
-        background: bgCard, 
-        borderRadius: '14px', 
-        border: `1px solid ${borderCol}`, 
-        overflow: 'hidden',
-        boxShadow: darkMode ? '0 4px 16px rgba(0,0,0,0.25)' : '0 4px 14px -2px rgba(45,38,30,0.05)'
-      }}>
-        <div style={{ padding: '20px 26px', borderBottom: `1px solid ${borderCol}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+      <div style={{ background: '#ffffff', borderRadius: '14px', border: '1px solid #e2dcd2', overflow: 'hidden', boxShadow }}>
+        <div style={{ padding: '20px 26px', borderBottom: '1px solid #e2dcd2', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: textMain }}>Users Directory</h3>
-            <p style={{ fontSize: '12.5px', color: textMuted }}>Platform users, assigned roles, and verified store owner ratings</p>
+            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#221f1c' }}>Users Directory</h3>
+            <p style={{ fontSize: '12.5px', color: '#756f66' }}>Platform users, assigned roles, and verified store owner ratings</p>
           </div>
-          <span style={{ 
-            fontSize: '12px', 
-            fontWeight: '600', 
-            background: darkMode ? '#2d2a25' : '#ede7dc', 
-            color: textMuted, 
-            padding: '4px 10px', 
-            borderRadius: '20px' 
-          }}>
+          <span style={{ fontSize: '12px', fontWeight: '600', background: '#ede7dc', color: '#756f66', padding: '4px 10px', borderRadius: '20px' }}>
             {users.length} users
           </span>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13.5px' }}>
             <thead>
-              <tr style={{ background: tableHeaderBg, color: textMuted, fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                <th onClick={() => handleUserSort('name')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+              <tr style={{ background: '#f0ebe1', color: '#756f66', fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <th onClick={() => handleUserSort('name')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Name {userSort.field === 'name' ? (userSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th onClick={() => handleUserSort('email')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+                <th onClick={() => handleUserSort('email')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Email {userSort.field === 'email' ? (userSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th onClick={() => handleUserSort('address')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+                <th onClick={() => handleUserSort('address')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Address {userSort.field === 'address' ? (userSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th onClick={() => handleUserSort('role')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: `1px solid ${tableBorder}` }}>
+                <th onClick={() => handleUserSort('role')} style={{ padding: '14px 24px', cursor: 'pointer', userSelect: 'none', borderBottom: '1px solid #e8e2d7' }}>
                   Role {userSort.field === 'role' ? (userSort.order === 'ASC' ? '▲' : '▼') : ''}
                 </th>
-                <th style={{ padding: '14px 24px', borderBottom: `1px solid ${tableBorder}` }}>Owner Rating</th>
+                <th style={{ padding: '14px 24px', borderBottom: '1px solid #e8e2d7' }}>Owner Rating</th>
               </tr>
             </thead>
             <tbody>
               {users.length === 0 ? (
                 <tr>
-                  <td colSpan="5" style={{ padding: '30px', textAlign: 'center', color: textMuted }}>
+                  <td colSpan="5" style={{ padding: '30px', textAlign: 'center', color: '#756f66' }}>
                     No users match the current filters.
                   </td>
                 </tr>
@@ -560,13 +472,13 @@ export default function AdminDashboard({ darkMode }) {
                   return (
                     <tr 
                       key={u.id} 
-                      style={{ borderTop: `1px solid ${tableBorder}`, transition: 'background-color 0.15s ease' }}
-                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = darkMode ? '#282521' : '#faf7f2'}
+                      style={{ borderTop: '1px solid #e8e2d7', transition: 'background-color 0.15s ease' }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#faf7f2'}
                       onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
-                      <td style={{ padding: '14px 24px', fontWeight: '600', color: textMain }}>{u.name}</td>
-                      <td style={{ padding: '14px 24px', color: textMuted }}>{u.email}</td>
-                      <td style={{ padding: '14px 24px', color: textMuted }}>{u.address}</td>
+                      <td style={{ padding: '14px 24px', fontWeight: '600', color: '#221f1c' }}>{u.name}</td>
+                      <td style={{ padding: '14px 24px', color: '#756f66' }}>{u.email}</td>
+                      <td style={{ padding: '14px 24px', color: '#756f66' }}>{u.address}</td>
                       <td style={{ padding: '14px 24px' }}>
                         <span style={{ 
                           padding: '4px 10px', 
@@ -587,7 +499,7 @@ export default function AdminDashboard({ darkMode }) {
                             ⭐ {u.owner_rating || 0} / 5
                           </span>
                         ) : (
-                          <span style={{ color: textMuted }}>—</span>
+                          <span style={{ color: '#756f66' }}>—</span>
                         )}
                       </td>
                     </tr>

@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// Token Verification Middleware
 exports.verifyToken = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1];
 
@@ -10,9 +9,9 @@ exports.verifyToken = (req, res, next) => {
     }
 
     try {
-        const jwtSecret = process.env.JWT_SECRET || 'roxiler_jwt_secret_key_default';
+        const jwtSecret = process.env.JWT_SECRET;
         const decoded = jwt.verify(token, jwtSecret);
-        req.user = decoded; // Decoded payload (id, role)
+        req.user = decoded;
     } catch (err) {
         return res.status(401).json({ error: "Invalid Token" });
     }

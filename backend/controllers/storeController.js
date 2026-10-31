@@ -9,7 +9,6 @@ exports.addStore = async (req, res) => {
             return res.status(400).json({ error: "Name, email, and address are required." });
         }
 
-        // Automatic Owner Assignment: Check if a user with this store email & role 'STORE_OWNER' exists
         const [userCheck] = await db.query(
             "SELECT id FROM users WHERE email = ? AND role = 'STORE_OWNER'",
             [email]
@@ -17,10 +16,9 @@ exports.addStore = async (req, res) => {
 
         let owner_id = null;
         if (userCheck && userCheck.length > 0) {
-            owner_id = userCheck[0].id; // Automatically link if owner account exists with same email
+            owner_id = userCheck[0].id;
         }
 
-        // Insert into MySQL stores table
         const [result] = await db.query(
             'INSERT INTO stores (name, email, address, owner_id) VALUES (?, ?, ?, ?)',
             [name, email, address, owner_id]
@@ -46,19 +44,15 @@ exports.getStores = async (req, res) => {
     try {
         const user_id = req.user.id;
 
-        // Search and Sorting parameters from query string
         const search = req.query.search || '';
         const sortBy = req.query.sortBy || 'name';
         const order = (req.query.order || 'ASC').toUpperCase();
-
-        // Valid columns check to prevent SQL injection
         const validSortColumns = ['name', 'address', 'overall_rating'];
         const sortColumn = validSortColumns.includes(sortBy) ? sortBy : 'name';
         const sortOrder = ['ASC', 'DESC'].includes(order) ? order : 'ASC';
 
         const searchTerm = `%${search}%`;
 
-        // MySQL Query with standard placeholders
         const query = `
             SELECT 
                 s.id AS store_id,

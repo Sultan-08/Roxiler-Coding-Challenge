@@ -1,26 +1,21 @@
-/* ===================================================
-   Beige & Grey Theme - Global Base Styles
-   =================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Light Mode Palette: Warm Beige & Refined Slate Greys */
   --bg-page: #f6f3ed;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #faf8f5;
   --bg-subtle: #f0ebe1;
   --bg-input: #fbf9f6;
-  
+
   --border-light: #e8e2d7;
   --border-card: #e2dcd2;
   --border-focus: #2c2825;
-  
+
   --text-primary: #221f1c;
   --text-body: #3a3632;
   --text-muted: #756f66;
   --text-on-primary: #faf8f4;
-  
+
   --primary-btn-bg: #2c2825;
   --primary-btn-hover: #171513;
   --secondary-btn-bg: #ede7dd;
@@ -30,11 +25,11 @@
   --accent-beige: #e5ded2;
   --accent-taupe: #a89f91;
   --star-color: #c58928;
-  
+
   --success-text: #2f592a;
   --success-bg: #edf5ec;
   --success-border: #c8e0c6;
-  
+
   --error-text: #a82e22;
   --error-bg: #faedeb;
   --error-border: #f0cdc9;
@@ -53,7 +48,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
   font-family: var(--font-main);
   background-color: var(--bg-page);
@@ -70,7 +66,12 @@ html, body {
   flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-main);
   color: var(--text-primary);
   letter-spacing: -0.015em;
@@ -86,7 +87,10 @@ a {
   text-decoration: none;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
   font-family: inherit;
 }
 

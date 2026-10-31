@@ -4,7 +4,6 @@ exports.getOwnerDashboard = async (req, res) => {
     try {
         const owner_id = req.user.id;
 
-        // Fetch user email
         const [userResult] = await db.query('SELECT email FROM users WHERE id = ?', [owner_id]);
         if (!userResult || userResult.length === 0) {
             return res.status(404).json({ error: "Owner user record not found." });
@@ -22,16 +21,13 @@ exports.getOwnerDashboard = async (req, res) => {
 
         const store = storeResult[0];
 
-        // Link store if not yet linked
         await db.query('UPDATE stores SET owner_id = ? WHERE id = ? AND owner_id IS NULL', [owner_id, store.id]);
 
-        // 2. Get the average rating of this store
         const [avgResult] = await db.query(
             'SELECT COALESCE(ROUND(AVG(rating), 1), 0) AS average_rating FROM ratings WHERE store_id = ?',
             [store.id]
         );
 
-        // 3. Get the list of users who submitted ratings for this store
         const [ratersResult] = await db.query(`
             SELECT u.name, u.email, r.rating, r.updated_at as rated_on
             FROM ratings r

@@ -6,7 +6,6 @@ exports.signup = async (req, res) => {
     try {
         const { name, email, password, address, role } = req.body;
 
-        // 1. Validations
         if (!name || name.length < 20 || name.length > 60) {
             return res.status(400).json({ error: "Name must be between 20 to 60 chars." });
         }
@@ -14,30 +13,24 @@ exports.signup = async (req, res) => {
             return res.status(400).json({ error: "Address cannot exceed 400 chars." });
         }
 
-        // Password must be 8-16 chars, 1 uppercase, 1 special character
         const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
         if (!passwordRegex.test(password)) {
             return res.status(400).json({ error: "Password must be 8-16 chars, include one uppercase letter and one special char." });
         }
 
-        // Email validation format check
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return res.status(400).json({ error: "Invalid mail format." });
         }
 
-        // 2. Check if user already exists
         const [userExists] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
         if (userExists && userExists.length > 0) {
             return res.status(400).json({ error: "This email is already registered." });
         }
 
-        // 3. Hash the Password securely
         const saltRounds = 10;
         const password_hash = await bcrypt.hash(password, saltRounds);
         const userRole = role || 'NORMAL_USER';
-
-        // 4. Insert New User into MySQL
         const [result] = await db.query(
             'INSERT INTO users (name, email, password_hash, address, role) VALUES (?, ?, ?, ?, ?)',
             [name, email, password_hash, address || null, userRole]
@@ -66,7 +59,6 @@ exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // 1. Find the user by email
         const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
         if (!users || users.length === 0) {
             return res.status(401).json({ error: "Invalid mail id or password, try again." });
@@ -74,21 +66,18 @@ exports.login = async (req, res) => {
 
         const user = users[0];
 
-        // 2. Compare the entered password with the hashed password in the database
         const isMatch = await bcrypt.compare(password, user.password_hash);
         if (!isMatch) {
             return res.status(401).json({ error: "Invalid mail id or password, try again." });
         }
 
-        // 3. Generate a JWT Token
-        const jwtSecret = process.env.JWT_SECRET || 'roxiler_jwt_secret_key_default';
+        const jwtSecret = process.env.JWT_SECRET;
         const token = jwt.sign(
             { id: user.id, role: user.role },
             jwtSecret,
             { expiresIn: '1d' }
         );
 
-        // 4. Send the token and user details to the frontend
         res.status(200).json({
             message: "Login successful !",
             token: token,

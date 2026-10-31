@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 exports.getDashboardStats = async (req, res) => {
     try {
-        // Run all three count queries concurrently in MySQL
         const [[usersRows], [storesRows], [ratingsRows]] = await Promise.all([
             db.query('SELECT COUNT(*) AS count FROM users'),
             db.query('SELECT COUNT(*) AS count FROM stores'),
@@ -28,8 +27,7 @@ exports.getDashboardStats = async (req, res) => {
 exports.getUsers = async (req, res) => {
     try {
         const { name, email, address, role, sortBy = 'name', order = 'ASC' } = req.query;
-        
-        // Allowed columns to prevent SQL injection
+
         const validSortColumns = ['name', 'email', 'address', 'role'];
         const sortColumn = validSortColumns.includes(sortBy) ? sortBy : 'name';
         const sortOrder = ['ASC', 'DESC'].includes(order.toUpperCase()) ? order.toUpperCase() : 'ASC';
@@ -65,7 +63,7 @@ exports.getUsers = async (req, res) => {
         }
 
         query += ` ORDER BY u.${sortColumn} ${sortOrder}`;
-        
+
         const [rows] = await db.query(query, params);
         res.status(200).json({ success: true, data: rows });
     } catch (err) {
@@ -99,14 +97,14 @@ exports.addUserByAdmin = async (req, res) => {
             [name, email, hashedPassword, address, userRole]
         );
 
-        res.status(201).json({ 
-            message: "User added successfully!", 
+        res.status(201).json({
+            message: "User added successfully!",
             user: {
                 id: result.insertId,
                 name,
                 email,
                 role: userRole
-            } 
+            }
         });
     } catch (err) {
         console.error(err);

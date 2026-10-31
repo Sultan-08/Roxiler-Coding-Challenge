@@ -10,9 +10,8 @@ const adminRoutes = require('./routes/adminRoutes');
 const storeOwnerRoutes = require('./routes/storeOwnerRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
-// Middlewares
 const corsOptions = process.env.CORS_ORIGIN
   ? { origin: process.env.CORS_ORIGIN, credentials: true }
   : {};

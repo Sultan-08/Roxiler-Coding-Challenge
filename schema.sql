@@ -1,7 +1,6 @@
 -- 1. CREATE DATABASE
 
 CREATE DATABASE IF NOT EXISTS roxiler_app;
-
 USE roxiler_app;
 
 -- 2. CREATE USERS TABLE

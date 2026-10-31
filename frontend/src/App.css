@@ -1,0 +1,15 @@
+.theme-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-card:hover {
+  border-color: #d2c8b8;
+}
+
+.table-row-hover {
+  transition: background-color 0.12s ease;
+}
+
+.table-row-hover:hover {
+  background-color: rgba(220, 210, 195, 0.22);
+}

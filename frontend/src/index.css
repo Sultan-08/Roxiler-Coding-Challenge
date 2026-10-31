@@ -1,0 +1,110 @@
+/* ===================================================
+   Beige & Grey Theme - Global Base Styles
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Light Mode Palette: Warm Beige & Refined Slate Greys */
+  --bg-page: #f6f3ed;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #faf8f5;
+  --bg-subtle: #f0ebe1;
+  --bg-input: #fbf9f6;
+  
+  --border-light: #e8e2d7;
+  --border-card: #e2dcd2;
+  --border-focus: #2c2825;
+  
+  --text-primary: #221f1c;
+  --text-body: #3a3632;
+  --text-muted: #756f66;
+  --text-on-primary: #faf8f4;
+  
+  --primary-btn-bg: #2c2825;
+  --primary-btn-hover: #171513;
+  --secondary-btn-bg: #ede7dd;
+  --secondary-btn-hover: #e2dad0;
+  --secondary-btn-text: #38342f;
+
+  --accent-beige: #e5ded2;
+  --accent-taupe: #a89f91;
+  --star-color: #c58928;
+  
+  --success-text: #2f592a;
+  --success-bg: #edf5ec;
+  --success-border: #c8e0c6;
+  
+  --error-text: #a82e22;
+  --error-bg: #faedeb;
+  --error-border: #f0cdc9;
+
+  --shadow-sm: 0 1px 2px rgba(38, 32, 24, 0.04);
+  --shadow-md: 0 4px 14px -2px rgba(38, 32, 24, 0.07);
+  --shadow-lg: 0 12px 24px -4px rgba(38, 32, 24, 0.1);
+
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+p {
+  color: var(--text-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d8d0c4;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b8ad9e;
+}

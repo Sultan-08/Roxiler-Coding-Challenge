@@ -3,8 +3,8 @@
 A full-stack web application that allows users to browse stores and submit ratings, store owners to monitor their store performance, and system admins to manage the entire platform.
 
 ![React](https://img.shields.io/badge/React-19-blue)
-![NodeJS](https://img.shields.io/badge/Node.js-20-green)
-![Express](https://img.shields.io/badge/Express.js-black)
+![NodeJS](https://img.shields.io/badge/Node.js-18+-green)
+![Express](https://img.shields.io/badge/Express.js-grey)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
 ![JWT](https://img.shields.io/badge/JWT-blue)
 ![Bcrypt](https://img.shields.io/badge/Bcrypt-yellow)
@@ -18,7 +18,7 @@ A full-stack web application that allows users to browse stores and submit ratin
 | **Frontend** | React 19, React Router v7, Axios, Vite |
 | **Backend** | Node.js, Express.js v5 |
 | **Database** | MySQL 8.0 |
-| **Auth** | JWT (jsonwebtoken) + bcrypt |
+| **Auth** | JWT + bcrypt |
 
 ---
 
@@ -137,7 +137,6 @@ DB_PASSWORD=your_password
 DB_DATABASE=db_name
 DB_PORT=3306
 JWT_SECRET=your_jwt_secret
-CORS_ORIGIN=http://localhost:5173
 PORT=3000
 ```
 
